@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
 
         if(!app.isRunning())
         {
-            app.setApplicationName(QObject::tr("PhotoFlare"));
+            app.setApplicationName(QObject::tr("photoflare"));
             app.setApplicationVersion(QObject::tr("1.5.3"));
             app.setOrganizationDomain(QObject::tr("photoflare.io"));
-            app.setOrganizationName(QObject::tr("photoflare"));
+            //app.setOrganizationName(QObject::tr("photoflare"));
 
             // Setup Default settings
             QString loc = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory)+"photoflare";
@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
             }
 
             // Set language based on System locale
-            if(SETTINGS->getUserLanguage() == "notset")
+            if((SETTINGS->getUserLanguage() == "notset") ||
+                (SETTINGS->getUserLanguage() == ""))
             {
                 QString sysLanguage =  QLocale::languageToString(QLocale::system().language());
                 QString lang;
@@ -70,7 +71,8 @@ int main(int argc, char *argv[])
             }
 
             QTranslator translator;
-            QStringList paths = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
+            ///usr/share/<APPNAME> will be <OrganizationName>/<ApplicationName>
+            QStringList paths = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
 
             for(int i = 0;i < paths.length(); i++)
             {
