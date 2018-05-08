@@ -65,12 +65,13 @@ prefsDialog::prefsDialog(QWidget *parent) :
     ui->historySlider->setValue(SETTINGS->getHistoryLimit().toInt());
 
     //Startup tab
-    QStringList list(QStringList() << "English" << "French" << "Dutch" << "German");
+    QStringList list(QStringList() << "English" << "French" << "Dutch" << "German" <<"Chinese");
     ui->comboBoxLanguage->addItems(list);
     ui->comboBoxLanguage->setItemIcon(0,QIcon(flagPath+"United-kingdom.png"));
     ui->comboBoxLanguage->setItemIcon(1,QIcon(flagPath+"France.png"));
     ui->comboBoxLanguage->setItemIcon(2,QIcon(flagPath+"Netherlands.png"));
     ui->comboBoxLanguage->setItemIcon(3,QIcon(flagPath+"Germany.png"));
+    ui->comboBoxLanguage->setItemIcon(3,QIcon(flagPath+"Taiwan.png"));
 
     ui->checkBoxMaximize->setChecked(SETTINGS->isMaximizeWindow());
     ui->checkBox->setChecked(SETTINGS->isMultiWindowMode());
@@ -86,6 +87,8 @@ prefsDialog::prefsDialog(QWidget *parent) :
 
     else if(SETTINGS->getUserLanguage() == "de")
         ui->comboBoxLanguage->setCurrentIndex(3);
+    else if(SETTINGS->getUserLanguage() == "zh_TW")
+        ui->comboBoxLanguage->setCurrentIndex(4);
 
     ui->restartButton->hide();
 }
